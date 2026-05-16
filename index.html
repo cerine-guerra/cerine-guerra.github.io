@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Cerine Guerra — Software & AI Developer</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23F5C518'/%3E%3Ccircle cx='50' cy='50' r='20' fill='white'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+<style>
+  :root {
+    --deep-purple: #1a0a2e;
+    --purple-mid: #2d1654;
+    --purple-light: #3d2272;
+    --gold: #F5C518;
+    --gold-dim: #c9a013;
+    --gold-muted: #8a6d09;
+    --white: #ffffff;
+    --off-white: #f9f7ff;
+    --muted: #b8aacf;
+    --text-body: #d8cfe8;
+    --border: rgba(245,197,24,0.15);
+    --border-hover: rgba(245,197,24,0.4);
+    --surface: rgba(255,255,255,0.03);
+    --surface-hover: rgba(255,255,255,0.06);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; font-size: 16px; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--deep-purple); color: var(--text-body); overflow-x: hidden; cursor: none; }
+  .cursor { width: 10px; height: 10px; background: var(--gold); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; transition: transform 0.15s ease; mix-blend-mode: difference; }
+  .cursor-ring { width: 36px; height: 36px; border: 1.5px solid var(--gold); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9998; transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), width 0.3s, height 0.3s, opacity 0.3s; opacity: 0.6; }
+  body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); opacity: 0.4; pointer-events: none; z-index: 1; }
+  body::after { content: ''; position: fixed; inset: 0; background-image: linear-gradient(rgba(245,197,24,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(245,197,24,0.03) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; z-index: 1; }
+
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 5vw; background: rgba(26, 10, 46, 0.85); backdrop-filter: blur(20px); border-bottom: 0.5px solid var(--border); }
+  .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .logo-mark { width: 36px; height: 36px; }
+  .nav-brand { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; color: var(--white); letter-spacing: 0.05em; }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a { font-size: 0.8rem; font-family: 'DM Mono', monospace; color: var(--muted); text-decoration: none; letter-spacing: 0.12em; text-transform: uppercase; transition: color 0.2s; position: relative; }
+  .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; right: 0; height: 1px; background: var(--gold); transform: scaleX(0); transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1); transform-origin: left; }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-links a:hover::after { transform: scaleX(1); }
+  .nav-socials { display: flex; gap: 1.2rem; align-items: center; }
+  .nav-socials a { color: var(--muted); font-size: 1rem; text-decoration: none; transition: color 0.2s, transform 0.2s; }
+  .nav-socials a:hover { color: var(--gold); transform: translateY(-2px); }
+
+  /* HERO */
+  #hero { min-height: 100vh; display: flex; align-items: center; padding: 8rem 5vw 5rem; position: relative; overflow: hidden; }
+  .hero-orb { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.12; pointer-events: none; }
+  .orb-1 { width: 600px; height: 600px; background: #7c3aed; top: -150px; right: -100px; animation: orb-float 8s ease-in-out infinite; }
+  .orb-2 { width: 400px; height: 400px; background: var(--gold); bottom: -100px; left: -50px; animation: orb-float 10s ease-in-out infinite reverse; }
+  @keyframes orb-float { 0%, 100% { transform: translate(0,0) scale(1); } 50% { transform: translate(30px,-40px) scale(1.05); } }
+  .hero-inner { display: grid; grid-template-columns: 1fr auto; gap: 4rem; align-items: center; width: 100%; max-width: 1200px; position: relative; z-index: 2; }
+  .hero-tag { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--gold); letter-spacing: 0.2em; text-transform: uppercase; display: flex; align-items: center; gap: 12px; margin-bottom: 1.5rem; opacity: 0; animation: fade-up 0.8s 0.2s forwards; }
+  .hero-tag::before { content: ''; display: block; width: 40px; height: 1px; background: var(--gold); }
+  .hero-name { font-family: 'Syne', sans-serif; font-size: clamp(3rem,7vw,6rem); font-weight: 800; line-height: 0.95; color: var(--white); letter-spacing: -0.03em; margin-bottom: 0.5rem; opacity: 0; animation: fade-up 0.8s 0.35s forwards; }
+  .hero-name span { color: var(--gold); }
+  .hero-title { font-family: 'DM Mono', monospace; font-size: clamp(0.85rem,1.5vw,1rem); color: var(--muted); letter-spacing: 0.08em; margin-bottom: 2rem; opacity: 0; animation: fade-up 0.8s 0.5s forwards; }
+  .hero-desc { font-size: 1.05rem; line-height: 1.8; color: var(--text-body); max-width: 560px; margin-bottom: 2.5rem; opacity: 0; animation: fade-up 0.8s 0.65s forwards; }
+  .hero-cta { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; opacity: 0; animation: fade-up 0.8s 0.8s forwards; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 0.75rem 1.8rem; font-family: 'DM Mono', monospace; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; border: none; cursor: none; transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1); position: relative; overflow: hidden; }
+  .btn-primary { background: var(--gold); color: var(--deep-purple); font-weight: 500; }
+  .btn-primary::before { content: ''; position: absolute; inset: 0; background: rgba(255,255,255,0.2); transform: translateX(-100%) skewX(-15deg); transition: transform 0.5s; }
+  .btn-primary:hover::before { transform: translateX(100%) skewX(-15deg); }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(245,197,24,0.3); }
+  .btn-outline { background: transparent; color: var(--gold); border: 1px solid var(--border-hover); }
+  .btn-outline:hover { background: rgba(245,197,24,0.08); border-color: var(--gold); transform: translateY(-2px); }
+  .hero-photo { position: relative; opacity: 0; animation: fade-left 0.9s 0.9s forwards; }
+  .photo-frame { width: 300px; height: 380px; border: 1px solid var(--border-hover); position: relative; overflow: hidden; }
+  .photo-inner { width: 100%; height: 100%; background: linear-gradient(135deg, #2d1654 0%, #1a0a2e 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
+  .photo-inner img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .photo-icon { width: 56px; height: 56px; border: 1px solid var(--border-hover); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--gold); font-size: 1.4rem; }
+  .photo-frame::before { content: ''; position: absolute; top: -1px; right: -1px; width: 40px; height: 40px; border-top: 2px solid var(--gold); border-right: 2px solid var(--gold); z-index: 2; }
+  .photo-frame::after { content: ''; position: absolute; bottom: -1px; left: -1px; width: 40px; height: 40px; border-bottom: 2px solid var(--gold); border-left: 2px solid var(--gold); z-index: 2; }
+  .photo-badge { position: absolute; bottom: -16px; left: -16px; background: var(--gold); color: var(--deep-purple); font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.5rem 1rem; z-index: 3; }
+  @keyframes fade-up { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fade-left { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: translateX(0); } }
+
+  /* SECTIONS */
+  section { padding: 7rem 5vw; position: relative; z-index: 2; }
+  .section-label { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--gold); letter-spacing: 0.25em; text-transform: uppercase; display: flex; align-items: center; gap: 12px; margin-bottom: 1rem; }
+  .section-label::before { content: ''; display: block; width: 32px; height: 1px; background: var(--gold); }
+  .section-title { font-family: 'Syne', sans-serif; font-size: clamp(2rem,4vw,3.2rem); font-weight: 700; color: var(--white); line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 4rem; }
+
+  /* ABOUT */
+  #about { border-top: 0.5px solid var(--border); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+  .about-text p { font-size: 1rem; line-height: 1.9; color: var(--text-body); margin-bottom: 1.2rem; }
+  .about-text p strong { color: var(--gold); font-weight: 500; }
+  .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 0.5px solid var(--border); }
+  .stat-cell { background: var(--deep-purple); padding: 1.8rem; transition: background 0.3s; }
+  .stat-cell:hover { background: var(--surface-hover); }
+  .stat-num { font-family: 'Syne', sans-serif; font-size: 2.5rem; font-weight: 800; color: var(--gold); line-height: 1; margin-bottom: 0.4rem; }
+  .stat-label { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--muted); letter-spacing: 0.12em; text-transform: uppercase; }
+  .about-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 2rem; }
+  .tag { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--gold-dim); border: 0.5px solid rgba(245,197,24,0.25); padding: 0.3rem 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; transition: all 0.2s; }
+  .tag:hover { background: rgba(245,197,24,0.08); border-color: var(--gold); color: var(--gold); }
+
+  /* SKILLS */
+  #skills { border-top: 0.5px solid var(--border); }
+  .skills-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 0.5px solid var(--border); }
+  .skill-category { background: var(--deep-purple); padding: 2.5rem; transition: background 0.3s; position: relative; overflow: hidden; }
+  .skill-category::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--gold); transform: scaleX(0); transition: transform 0.4s cubic-bezier(0.23,1,0.32,1); transform-origin: left; }
+  .skill-category:hover { background: var(--surface); }
+  .skill-category:hover::before { transform: scaleX(1); }
+  .skill-icon { width: 44px; height: 44px; background: rgba(245,197,24,0.1); display: flex; align-items: center; justify-content: center; color: var(--gold); font-size: 1.2rem; margin-bottom: 1.2rem; border: 0.5px solid var(--border); }
+  .skill-cat-name { font-family: 'Syne', sans-serif; font-size: 0.85rem; font-weight: 700; color: var(--white); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 1.2rem; }
+  .skill-list { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .skill-pill { font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--muted); background: var(--surface); border: 0.5px solid var(--border); padding: 0.3rem 0.65rem; letter-spacing: 0.06em; transition: all 0.2s; }
+  .skill-pill:hover { color: var(--gold); border-color: rgba(245,197,24,0.4); background: rgba(245,197,24,0.06); }
+
+  /* EXPERIENCE */
+  #experience { border-top: 0.5px solid var(--border); }
+  .timeline { position: relative; padding-left: 2rem; }
+  .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: var(--border); }
+  .timeline-item { position: relative; margin-bottom: 3.5rem; padding-left: 2rem; opacity: 0; transform: translateX(-20px); transition: all 0.6s cubic-bezier(0.23,1,0.32,1); }
+  .timeline-item.visible { opacity: 1; transform: translateX(0); }
+  .timeline-dot { position: absolute; left: -2.5rem; top: 0.3rem; width: 9px; height: 9px; background: var(--gold); border: 2px solid var(--deep-purple); border-radius: 50%; box-shadow: 0 0 0 1px var(--gold); }
+  .timeline-meta { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--gold-dim); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.5rem; }
+  .timeline-role { font-family: 'Syne', sans-serif; font-size: 1.15rem; font-weight: 700; color: var(--white); margin-bottom: 0.25rem; }
+  .timeline-org { font-size: 0.85rem; color: var(--muted); margin-bottom: 1rem; }
+  .timeline-body { font-size: 0.9rem; line-height: 1.8; color: var(--text-body); }
+  .timeline-body ul { padding-left: 1rem; list-style: none; }
+  .timeline-body ul li { position: relative; padding-left: 1rem; margin-bottom: 0.4rem; }
+  .timeline-body ul li::before { content: '—'; position: absolute; left: 0; color: var(--gold); font-size: 0.8rem; }
+
+  /* PROJECTS */
+  #projects { border-top: 0.5px solid var(--border); }
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1px; background: var(--border); border: 0.5px solid var(--border); }
+  .project-card { background: var(--deep-purple); padding: 2.5rem; transition: background 0.3s; cursor: none; position: relative; display: flex; flex-direction: column; gap: 1rem; overflow: hidden; text-decoration: none; }
+  .project-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--gold); transform: scaleX(0); transition: transform 0.4s cubic-bezier(0.23,1,0.32,1); transform-origin: right; }
+  .project-card:hover { background: rgba(245,197,24,0.02); }
+  .project-card:hover::after { transform: scaleX(1); transform-origin: left; }
+  .project-image { width: 100%; height: 160px; object-fit: cover; border: 0.5px solid var(--border); margin-bottom: 0.5rem; }
+  .project-header { display: flex; justify-content: space-between; align-items: flex-start; }
+  .project-num { font-family: 'Syne', sans-serif; font-size: 2.5rem; font-weight: 800; color: rgba(245,197,24,0.1); line-height: 1; letter-spacing: -0.05em; }
+  .project-status { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.25rem 0.65rem; border: 0.5px solid; }
+  .project-status.active { color: #4ade80; border-color: rgba(74,222,128,0.3); background: rgba(74,222,128,0.06); }
+  .project-status.complete { color: var(--gold); border-color: var(--border-hover); background: rgba(245,197,24,0.06); }
+  .project-name { font-family: 'Syne', sans-serif; font-size: 1.15rem; font-weight: 700; color: var(--white); line-height: 1.3; }
+  .project-desc { font-size: 0.88rem; line-height: 1.75; color: var(--text-body); flex: 1; }
+  .project-accent { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--gold); letter-spacing: 0.08em; border-top: 0.5px solid var(--border); padding-top: 1rem; }
+  .project-accent a { color: var(--gold); text-decoration: none; }
+  .project-stack { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .stack-tag { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--muted); background: var(--surface); border: 0.5px solid var(--border); padding: 0.2rem 0.55rem; letter-spacing: 0.05em; }
+
+  /* CERTIFICATIONS */
+  #certifications { border-top: 0.5px solid var(--border); }
+  .cert-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 0.5px solid var(--border); }
+  .cert-card { background: var(--deep-purple); padding: 1.8rem; transition: background 0.3s; }
+  .cert-card:hover { background: var(--surface); }
+  .cert-year { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--gold-dim); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.6rem; }
+  .cert-name { font-family: 'Syne', sans-serif; font-size: 0.9rem; font-weight: 600; color: var(--white); line-height: 1.4; margin-bottom: 0.4rem; }
+  .cert-org { font-size: 0.78rem; color: var(--muted); }
+
+  /* CONTACT */
+  #contact { border-top: 0.5px solid var(--border); }
+  .contact-layout { display: grid; grid-template-columns: 1fr 1.4fr; gap: 5rem; align-items: start; }
+  .contact-info h3 { font-family: 'Syne', sans-serif; font-size: 1.8rem; font-weight: 700; color: var(--white); margin-bottom: 1rem; line-height: 1.2; }
+  .contact-info p { font-size: 0.95rem; line-height: 1.8; color: var(--text-body); margin-bottom: 2rem; }
+  .contact-links { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2.5rem; }
+  .contact-link-item { display: flex; align-items: center; gap: 12px; font-family: 'DM Mono', monospace; font-size: 0.78rem; color: var(--muted); text-decoration: none; letter-spacing: 0.05em; transition: color 0.2s; padding-bottom: 0.8rem; border-bottom: 0.5px solid var(--border); }
+  .contact-link-item:hover { color: var(--gold); }
+  .contact-link-item i { color: var(--gold); width: 16px; font-size: 0.9rem; }
+  .contact-form { display: flex; flex-direction: column; gap: 0; border: 0.5px solid var(--border); }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; }
+  .form-field { position: relative; border-bottom: 0.5px solid var(--border); }
+  .form-field:first-child { border-right: 0.5px solid var(--border); }
+  .form-field label { display: block; font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--gold); letter-spacing: 0.15em; text-transform: uppercase; padding: 1rem 1.2rem 0.3rem; }
+  .form-field input, .form-field select, .form-field textarea { width: 100%; background: transparent; border: none; outline: none; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; color: var(--white); padding: 0.3rem 1.2rem 1rem; resize: none; -webkit-appearance: none; }
+  .form-field select option { background: var(--purple-mid); color: var(--white); }
+  .form-field.full { grid-column: 1 / -1; }
+  .form-field textarea { min-height: 140px; }
+  .form-field input:focus ~ .field-line, .form-field textarea:focus ~ .field-line, .form-field select:focus ~ .field-line { transform: scaleX(1); }
+  .field-line { position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: var(--gold); transform: scaleX(0); transition: transform 0.4s cubic-bezier(0.23,1,0.32,1); transform-origin: left; }
+  .form-actions { display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 1.5rem; border-top: 0.5px solid var(--border); }
+  .form-note { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--muted); letter-spacing: 0.08em; }
+  .btn-submit { display: inline-flex; align-items: center; gap: 8px; padding: 0.65rem 1.5rem; background: var(--gold); color: var(--deep-purple); font-family: 'DM Mono', monospace; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; border: none; cursor: none; transition: all 0.3s; position: relative; overflow: hidden; }
+  .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(245,197,24,0.25); }
+  .btn-submit:disabled { opacity: 0.5; }
+  .form-success { padding: 3rem; text-align: center; display: none; }
+  .form-success h4 { font-family: 'Syne', sans-serif; font-size: 1.2rem; color: var(--white); margin-bottom: 0.5rem; }
+  .form-success p { font-size: 0.85rem; color: var(--muted); }
+
+  /* MODAL */
+  .modal-overlay { position: fixed; inset: 0; background: rgba(26,10,46,0.92); z-index: 2000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.4s; backdrop-filter: blur(8px); }
+  .modal-overlay.open { opacity: 1; pointer-events: all; }
+  .modal { background: var(--purple-mid); border: 0.5px solid var(--border-hover); max-width: 500px; width: 90%; position: relative; transform: translateY(30px) scale(0.97); transition: transform 0.4s cubic-bezier(0.23,1,0.32,1); }
+  .modal-overlay.open .modal { transform: translateY(0) scale(1); }
+  .modal-header { padding: 2rem 2rem 1.5rem; border-bottom: 0.5px solid var(--border); display: flex; justify-content: space-between; align-items: flex-start; }
+  .modal-header h3 { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--white); margin-bottom: 0.3rem; }
+  .modal-header p { font-size: 0.8rem; color: var(--muted); }
+  .modal-close { background: none; border: none; color: var(--muted); font-size: 1.2rem; cursor: none; transition: color 0.2s; padding: 0.25rem; }
+  .modal-close:hover { color: var(--gold); }
+  .modal-body { padding: 2rem; display: flex; flex-direction: column; gap: 1.2rem; }
+  .modal-field label { display: block; font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--gold); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.5rem; }
+  .modal-field input, .modal-field select, .modal-field textarea { width: 100%; background: rgba(255,255,255,0.04); border: 0.5px solid var(--border); outline: none; font-family: 'DM Sans', sans-serif; font-size: 0.88rem; color: var(--white); padding: 0.7rem 0.9rem; transition: border-color 0.2s; resize: none; -webkit-appearance: none; }
+  .modal-field select option { background: var(--purple-mid); }
+  .modal-field input:focus, .modal-field select:focus, .modal-field textarea:focus { border-color: var(--gold); }
+  .modal-foot { padding: 1.5rem 2rem; border-top: 0.5px solid var(--border); display: flex; justify-content: flex-end; gap: 0.75rem; }
+  .modal-cancel { background: none; border: 0.5px solid var(--border); color: var(--muted); font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.6rem 1.2rem; cursor: none; transition: all 0.2s; }
+  .modal-cancel:hover { border-color: var(--muted); color: var(--white); }
+
+  /* FOOTER */
+  footer { border-top: 0.5px solid var(--border); padding: 2.5rem 5vw; display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 2; }
+  .footer-copy { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--muted); letter-spacing: 0.08em; }
+  .footer-logo { display: flex; align-items: center; gap: 8px; }
+
+  /* SCROLL REVEAL */
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s cubic-bezier(0.23,1,0.32,1), transform 0.7s cubic-bezier(0.23,1,0.32,1); }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero-photo { display: none; }
+    .about-grid { grid-template-columns: 1fr; }
+    .skills-container { grid-template-columns: 1fr; }
+    .contact-layout { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .cert-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+  }
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--deep-purple); }
+  ::-webkit-scrollbar-thumb { background: var(--gold-muted); }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">
+    <svg class="logo-mark" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="50" cy="50" r="48" fill="#F5C518" opacity="0.15"/>
+      <path d="M68 50C68 59.9411 59.9411 68 50 68C40.0589 68 32 59.9411 32 50C32 40.0589 40.0589 32 50 32" stroke="#F5C518" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="50" cy="50" r="8" fill="#F5C518" opacity="0.3"/>
+      <circle cx="50" cy="50" r="3" fill="#F5C518"/>
+    </svg>
+    <span class="nav-brand">CERINE.G</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#certifications">Certs</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-socials">
+    <a href="https://github.com/cerine-guerra" target="_blank"><i class="fab fa-github"></i></a>
+    <a href="https://www.linkedin.com/in/cerine-guerra" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+    <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a>
+    <a href="mailto:cerineguerra@gmail.com"><i class="far fa-envelope"></i></a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-orb orb-1"></div>
+  <div class="hero-orb orb-2"></div>
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-tag" id="heroTag">Available for collaboration</div>
+      <h1 class="hero-name">Cerine<br /><span>Guerra</span></h1>
+      <div class="hero-title" id="heroSubtitle">Software Developer &nbsp;/&nbsp; AI Engineer &nbsp;/&nbsp; Embedded Systems</div>
+      <p class="hero-desc" id="heroDesc">Electronics and Electrical Engineering student at IGEE Boumerdes.</p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn btn-primary">View Projects <i class="fas fa-arrow-right" style="font-size:0.75rem"></i></a>
+        <button class="btn btn-outline" onclick="openModal()">Download CV <i class="fas fa-download" style="font-size:0.75rem"></i></button>
+        <a href="#contact" class="btn btn-outline">Get In Touch</a>
+      </div>
+    </div>
+    <div class="hero-photo">
+      <div class="photo-frame">
+        <div class="photo-inner" id="photoInner">
+          <div class="photo-icon"><i class="fas fa-user"></i></div>
+          <span>Your photo here</span>
+        </div>
+        <div class="photo-badge">CG — 2026</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">01 — About</div>
+  <h2 class="section-title reveal">Who I Am</h2>
+  <div class="about-grid">
+    <div class="about-text reveal" id="aboutText"></div>
+    <div class="reveal">
+      <div class="stat-grid" id="statGrid"></div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">02 — Skills</div>
+  <h2 class="section-title reveal">Technical Stack</h2>
+  <div class="skills-container" id="skillsContainer"></div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label">03 — Experience</div>
+  <h2 class="section-title reveal">Professional History</h2>
+  <div class="timeline" id="timeline"></div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">04 — Projects</div>
+  <h2 class="section-title reveal">Selected Work</h2>
+  <div class="projects-grid" id="projectsGrid"></div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="section-label">05 — Certifications & Activities</div>
+  <h2 class="section-title reveal">Recognition</h2>
+  <div class="cert-grid reveal" id="certGrid"></div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">06 — Contact</div>
+  <h2 class="section-title reveal">Start a Conversation</h2>
+  <div class="contact-layout">
+    <div class="reveal">
+      <div class="contact-info">
+        <h3>Let's build something worth building.</h3>
+        <p>Whether you have a project in mind, are looking for a collaborator, or want to discuss embedded systems, AI, or software — I am open and available.</p>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:cerineguerra@gmail.com" class="contact-link-item"><i class="far fa-envelope"></i>cerineguerra@gmail.com</a>
+        <a href="https://github.com/cerine-guerra" target="_blank" class="contact-link-item"><i class="fab fa-github"></i>github.com/cerine-guerra</a>
+        <a href="https://www.linkedin.com/in/cerine-guerra" target="_blank" class="contact-link-item"><i class="fab fa-linkedin-in"></i>linkedin.com/in/cerine-guerra</a>
+        <a href="https://t.me/Cerine_gr" target="_blank" class="contact-link-item"><i class="fab fa-telegram-plane"></i>t.me/Cerine_gr</a>
+        <a href="https://www.instagram.com/" target="_blank" class="contact-link-item"><i class="fab fa-instagram"></i>@cerine.g</a>
+      </div>
+      <button class="btn btn-outline" onclick="openModal()" style="font-size:0.75rem;padding:0.65rem 1.5rem;">
+        <i class="fas fa-download" style="font-size:0.75rem"></i> Download CV
+      </button>
+    </div>
+    <div class="reveal">
+      <form class="contact-form" id="contactForm">
+        <div class="form-row">
+          <div class="form-field">
+            <label>Your Email</label>
+            <input type="email" name="email" required placeholder="hello@example.com" />
+            <div class="field-line"></div>
+          </div>
+          <div class="form-field">
+            <label>Service Needed</label>
+            <select name="service" required>
+              <option value="" disabled selected>Select a service</option>
+              <option>AI / Machine Learning</option>
+              <option>Embedded Systems / IoT</option>
+              <option>Full-Stack Web Development</option>
+              <option>Mobile App (Flutter)</option>
+              <option>Data Analysis</option>
+              <option>Consultation</option>
+              <option>Collaboration / Partnership</option>
+              <option>Other</option>
+            </select>
+            <div class="field-line"></div>
+          </div>
+        </div>
+        <div class="form-field full" style="border-bottom:0.5px solid var(--border)">
+          <label>Message</label>
+          <textarea name="message" required placeholder="Describe your project, idea, or question..."></textarea>
+          <div class="field-line"></div>
+        </div>
+        <div class="form-actions">
+          <span class="form-note">Messages sent directly to cerineguerra@gmail.com</span>
+          <button type="submit" class="btn-submit" id="submitBtn">Send Message <i class="fas fa-arrow-right" style="font-size:0.7rem"></i></button>
+        </div>
+        <div class="form-success" id="formSuccess">
+          <h4>Message received.</h4>
+          <p>Cerine will get back to you within 48 hours.</p>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-copy">&copy; 2026 Cerine Guerra. All rights reserved.</div>
+  <div class="footer-logo">
+    <svg width="28" height="28" viewBox="0 0 100 100" fill="none">
+      <circle cx="50" cy="50" r="48" fill="#F5C518" opacity="0.12"/>
+      <path d="M68 50C68 59.9411 59.9411 68 50 68C40.0589 68 32 59.9411 32 50C32 40.0589 40.0589 32 50 32" stroke="#F5C518" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="50" cy="50" r="3" fill="#F5C518"/>
+    </svg>
+    <span style="font-family:'Syne',sans-serif;font-size:0.8rem;font-weight:700;color:var(--muted);">CERINE.G</span>
+  </div>
+</footer>
+
+<!-- CV MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="handleOverlayClick(event)">
+  <div class="modal" id="cvModal">
+    <div class="modal-header">
+      <div>
+        <h3>Download CV</h3>
+        <p>Please share a bit of context before downloading.</p>
+      </div>
+      <button class="modal-close" onclick="closeModal()"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-field"><label>Your Name</label><input type="text" id="cv-name" placeholder="Full name" /></div>
+      <div class="modal-field"><label>Your Email</label><input type="email" id="cv-email" placeholder="hello@company.com" /></div>
+      <div class="modal-field">
+        <label>Purpose</label>
+        <select id="cv-purpose">
+          <option value="" disabled selected>Why do you need this CV?</option>
+          <option>Recruitment / Job Offer</option>
+          <option>Internship Opportunity</option>
+          <option>Freelance Project</option>
+          <option>Research Collaboration</option>
+          <option>Mentorship</option>
+          <option>Competition / Program Application</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="modal-field"><label>Company / Organization (optional)</label><input type="text" id="cv-company" placeholder="Your company or institution" /></div>
+      <div class="modal-field"><label>Why do you want to work with Cerine? (optional)</label><textarea id="cv-reason" style="min-height:80px" placeholder="Tell Cerine a bit more about your interest..."></textarea></div>
+    </div>
+    <div class="modal-foot">
+      <button class="modal-cancel" onclick="closeModal()">Cancel</button>
+      <button class="btn-submit" onclick="handleCVRequest()">Submit Request <i class="fas fa-paper-plane" style="font-size:0.7rem"></i></button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════════════
+// LOAD DATA — fetch data.json from same folder
+// Falls back to embedded defaults if fetch fails (e.g. running locally via file://)
+// ══════════════════════════════════════════
+async function loadData() {
+  try {
+    const res = await fetch('data.json?v=' + Date.now());
+    if (!res.ok) throw new Error('fetch failed');
+    return await res.json();
+  } catch {
+    // fallback: return a minimal skeleton so page doesn't break
+    return null;
+  }
+}
+
+function esc(s) {
+  return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+async function init() {
+  const data = await loadData();
+  if (!data) { console.warn('data.json not found — portfolio will use placeholder content.'); return; }
+
+  // ── HERO ──
+  document.getElementById('heroTag').textContent = data.hero?.tag || '';
+  document.getElementById('heroSubtitle').innerHTML = (data.hero?.subtitle || '').replace(/ \/ /g, ' &nbsp;/&nbsp; ');
+  document.getElementById('heroDesc').textContent = data.hero?.desc || '';
+  if (data.hero?.photo) {
+    document.getElementById('photoInner').innerHTML = `<img src="${data.hero.photo}" alt="Cerine Guerra" />`;
+  }
+
+  // ── ABOUT TEXT ──
+  const aboutEl = document.getElementById('aboutText');
+  const paragraphs = (data.about?.text || '').split('\n\n').filter(Boolean);
+  aboutEl.innerHTML = paragraphs.map(p => `<p>${esc(p)}</p>`).join('');
+  // tags
+  if (data.about?.tags?.length) {
+    const tagsDiv = document.createElement('div');
+    tagsDiv.className = 'about-tags';
+    tagsDiv.innerHTML = data.about.tags.map(t => `<span class="tag">${esc(t)}</span>`).join('');
+    aboutEl.appendChild(tagsDiv);
+  }
+
+  // ── STATS ──
+  const statGrid = document.getElementById('statGrid');
+  statGrid.innerHTML = (data.about?.stats || []).map(s => `
+    <div class="stat-cell">
+      <div class="stat-num">${esc(s.num)}</div>
+      <div class="stat-label">${esc(s.label)}</div>
+    </div>
+  `).join('');
+
+  // ── SKILLS ──
+  const skillsCont = document.getElementById('skillsContainer');
+  skillsCont.innerHTML = (data.skills || []).map(cat => `
+    <div class="skill-category reveal">
+      <div class="skill-icon"><i class="${cat.icon}"></i></div>
+      <div class="skill-cat-name">${esc(cat.name)}</div>
+      <div class="skill-list">${(cat.items || []).map(i => `<span class="skill-pill">${esc(i)}</span>`).join('')}</div>
+    </div>
+  `).join('');
+
+  // ── EXPERIENCE ──
+  const timeline = document.getElementById('timeline');
+  timeline.innerHTML = (data.experience || []).map(e => {
+    const bullets = (e.body || '').split('\n').filter(Boolean);
+    return `
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-meta">${esc(e.date)}</div>
+        <div class="timeline-role">${esc(e.role)}</div>
+        <div class="timeline-org">${esc(e.org)}</div>
+        <div class="timeline-body"><ul>${bullets.map(b => `<li>${esc(b)}</li>`).join('')}</ul></div>
+      </div>
+    `;
+  }).join('');
+
+  // ── PROJECTS ──
+  const grid = document.getElementById('projectsGrid');
+  const projects = data.projects || [];
+  grid.innerHTML = projects.map((p, i) => {
+    const tag = `<span class="project-status ${p.status}">${p.status === 'active' ? 'In Progress' : 'Completed'}</span>`;
+    const img = p.image ? `<img class="project-image" src="${p.image}" alt="${esc(p.name)}" />` : '';
+    const accentContent = p.github
+      ? `<a href="${esc(p.github)}" target="_blank" rel="noopener">${esc(p.accent)} <i class="fas fa-external-link-alt" style="font-size:0.6rem"></i></a>`
+      : esc(p.accent);
+    const cardTag = p.github ? 'a' : 'div';
+    const cardHref = p.github ? `href="${esc(p.github)}" target="_blank" rel="noopener"` : '';
+    return `
+      <${cardTag} class="project-card reveal" ${cardHref}>
+        ${img}
+        <div class="project-header">
+          <span class="project-num">${String(i+1).padStart(2,'0')}</span>
+          ${tag}
+        </div>
+        <div class="project-name">${esc(p.name)}</div>
+        <div class="project-desc">${esc(p.desc)}</div>
+        <div class="project-accent">${accentContent}</div>
+        <div class="project-stack">${(p.stack||[]).map(s => `<span class="stack-tag">${esc(s)}</span>`).join('')}</div>
+      </${cardTag}>
+    `;
+  }).join('');
+
+  // ── CERTIFICATIONS ──
+  const certGrid = document.getElementById('certGrid');
+  certGrid.innerHTML = (data.certifications || []).map(c => `
+    <div class="cert-card">
+      <div class="cert-year">${esc(c.year)}</div>
+      <div class="cert-name">${esc(c.name)}</div>
+      <div class="cert-org">${esc(c.org)}</div>
+    </div>
+  `).join('');
+
+  // re-run reveal observer after dynamic content is added
+  setupReveal();
+}
+
+// ══════════════════════════════════════════
+// SCROLL REVEAL
+// ══════════════════════════════════════════
+function setupReveal() {
+  const reveals = document.querySelectorAll('.reveal, .timeline-item');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+}
+
+// ══════════════════════════════════════════
+// CURSOR
+// ══════════════════════════════════════════
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursor-ring');
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cursor.style.left = mx - 5 + 'px';
+  cursor.style.top = my - 5 + 'px';
+});
+function lerpRing() {
+  rx += (mx - rx) * 0.1; ry += (my - ry) * 0.1;
+  ring.style.left = rx - 18 + 'px'; ring.style.top = ry - 18 + 'px';
+  requestAnimationFrame(lerpRing);
+}
+lerpRing();
+document.querySelectorAll('a, button').forEach(el => {
+  el.addEventListener('mouseenter', () => { cursor.style.transform = 'scale(2.5)'; ring.style.width = '56px'; ring.style.height = '56px'; ring.style.opacity = '0.3'; });
+  el.addEventListener('mouseleave', () => { cursor.style.transform = 'scale(1)'; ring.style.width = '36px'; ring.style.height = '36px'; ring.style.opacity = '0.6'; });
+});
+
+// ══════════════════════════════════════════
+// CONTACT FORM
+// ══════════════════════════════════════════
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true; btn.textContent = 'Sending...';
+  const subject = encodeURIComponent(`Portfolio Contact — ${this.service.value}`);
+  const body = encodeURIComponent(`From: ${this.email.value}\nService: ${this.service.value}\n\n${this.message.value}`);
+  window.location.href = `mailto:cerineguerra@gmail.com?subject=${subject}&body=${body}`;
+  setTimeout(() => {
+    document.getElementById('formSuccess').style.display = 'block';
+    this.querySelector('.form-row').style.display = 'none';
+    document.querySelectorAll('.form-field.full').forEach(f => f.style.display = 'none');
+    document.querySelector('.form-actions').style.display = 'none';
+  }, 800);
+});
+
+// ══════════════════════════════════════════
+// CV MODAL
+// ══════════════════════════════════════════
+function openModal() { document.getElementById('modalOverlay').classList.add('open'); document.body.style.overflow = 'hidden'; }
+function closeModal() { document.getElementById('modalOverlay').classList.remove('open'); document.body.style.overflow = ''; }
+function handleOverlayClick(e) { if (e.target === document.getElementById('modalOverlay')) closeModal(); }
+
+async function handleCVRequest() {
+  const name = document.getElementById('cv-name').value.trim();
+  const email = document.getElementById('cv-email').value.trim();
+  const purpose = document.getElementById('cv-purpose').value;
+  const company = document.getElementById('cv-company').value.trim();
+  const reason = document.getElementById('cv-reason').value.trim();
+  if (!email || !purpose) { alert('Please fill in your email and purpose.'); return; }
+
+  // Save request to data.json via GitHub API
+  const request = {
+    name, email, purpose, company, reason,
+    time: new Date().toLocaleString(),
+    status: 'pending'
+  };
+
+  try {
+    // Fetch current data.json
+    const res = await fetch('data.json?v=' + Date.now());
+    const data = await res.json();
+    if (!data.cvRequests) data.cvRequests = [];
+    data.cvRequests.push(request);
+
+    // Write back via GitHub API
+    await saveToGitHub(data);
+    closeModal();
+    alert('Your request has been submitted. Cerine will review it and send you the CV directly.');
+  } catch(err) {
+    console.error(err);
+    // Fallback: notify via email
+    const subject = encodeURIComponent('CV Request');
+    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nPurpose: ${purpose}\nOrganization: ${company}\n\n${reason}`);
+    window.location.href = `mailto:cerineguerra@gmail.com?subject=${subject}&body=${body}`;
+    closeModal();
+  }
+}
+
+// GitHub save — reads config from data.json's _config field
+async function saveToGitHub(data) {
+  const cfg = data._config;
+  if (!cfg || !cfg.token || !cfg.owner || !cfg.repo) throw new Error('No GitHub config in data.json');
+  const apiUrl = `https://api.github.com/repos/${cfg.owner}/${cfg.repo}/contents/data.json`;
+  // Get current SHA
+  const shaRes = await fetch(apiUrl, { headers: { Authorization: `token ${cfg.token}`, Accept: 'application/vnd.github.v3+json' } });
+  const shaData = await shaRes.json();
+  const sha = shaData.sha;
+  // Encode
+  const content = btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2))));
+  await fetch(apiUrl, {
+    method: 'PUT',
+    headers: { Authorization: `token ${cfg.token}`, Accept: 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message: 'CV request submitted', content, sha })
+  });
+}
+
+// ══════════════════════════════════════════
+// ACTIVE NAV
+// ══════════════════════════════════════════
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) current = s.id; });
+  navLinks.forEach(a => { a.style.color = a.getAttribute('href') === '#' + current ? 'var(--gold)' : ''; });
+});
+
+// ── BOOT ──
+init();
+</script>
+</body>
+</html>
