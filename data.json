@@ -157,34 +157,6 @@
         "Maps API"
       ],
       "image": ""
-    },
-    {
-      "name": "Smart Agriculture KNN Model",
-      "status": "complete",
-      "desc": "A crop intelligence system that provides farmers with personalized recommendations on crop management, pest control, and irrigation scheduling using K-Nearest Neighbors classification over agricultural feature data.",
-      "accent": "View on GitHub",
-      "github": "https://github.com/cerine-guerra/knn_smart_agriculture_model",
-      "stack": [
-        "Python",
-        "KNN",
-        "Pandas",
-        "Jupyter"
-      ],
-      "image": ""
-    },
-    {
-      "name": "Breast Cancer KNN Classifier",
-      "status": "complete",
-      "desc": "A classification model that determines whether a breast tumor is benign or malignant using 30 clinical features from the UCI dataset. Implements the KNN algorithm with data normalization and cross-validation for reliable clinical predictions.",
-      "accent": "View on GitHub",
-      "github": "https://github.com/cerine-guerra/breast-cancer-knn-classifier",
-      "stack": [
-        "Python",
-        "KNN",
-        "Scikit-Learn",
-        "UCI Dataset"
-      ],
-      "image": ""
     }
   ],
   "certifications": [
