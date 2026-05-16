@@ -7,29 +7,80 @@
   },
   "about": {
     "text": "I am a second-year Electrical Engineering student at the Institute of Electronics and Electrical Engineering in Boumerdes, Algeria, with a practice-first approach to engineering. My work spans embedded systems, artificial intelligence, and full-stack development — domains I combine to build systems that are both intelligent and physically grounded.\n\nI led the development of a real-time water quality monitoring device from concept to prototype, built an AI malware detection platform achieving 97% accuracy, and designed a cancer prediction model with 94% classification accuracy. These are not academic exercises — they are production-oriented builds driven by real constraints.\n\nBeyond engineering, I serve as CEO and Head of Marketing at the Injaz El Djazair program and contribute as a software developer and media lead at the Intellect Scientific Club, where I bridge technical output with creative communication.",
-    "tags": ["Arabic — Native", "English — C1 Fluent", "French — Advanced", "Boumerdes, Algeria"],
+    "tags": [
+      "Arabic — Native",
+      "English — C1 Fluent",
+      "French — Advanced",
+      "Boumerdes, Algeria"
+    ],
     "stats": [
-      { "num": "97%", "label": "Malware Detection Accuracy" },
-      { "num": "94%", "label": "Cancer Model Accuracy" },
-      { "num": "30%", "label": "Social Media Reach Growth" },
-      { "num": "2nd", "label": "IACE Competition Placement" }
+      {
+        "num": "97%",
+        "label": "Malware Detection Accuracy"
+      },
+      {
+        "num": "94%",
+        "label": "Cancer Model Accuracy"
+      },
+      {
+        "num": "30%",
+        "label": "Social Media Reach Growth"
+      },
+      {
+        "num": "2nd",
+        "label": "IACE Competition Placement"
+      }
     ]
   },
   "skills": [
     {
       "icon": "fas fa-microchip",
       "name": "Electronics & Embedded",
-      "items": ["Circuit Analysis", "Schematic Design", "Analog Electronics", "Digital Electronics", "Embedded Systems", "Arduino", "ESP32", "Sensor Integration", "IoT"]
+      "items": [
+        "Circuit Analysis",
+        "Schematic Design",
+        "Analog Electronics",
+        "Digital Electronics",
+        "Embedded Systems",
+        "Arduino",
+        "ESP32",
+        "Sensor Integration",
+        "IoT"
+      ]
     },
     {
       "icon": "fas fa-code",
       "name": "Software & Web",
-      "items": ["Python", "C", "JavaScript", "HTML / CSS", "Vue.js", "Flutter / Dart", "FastAPI", "SQL", "Docker", "Git", "Firebase"]
+      "items": [
+        "Python",
+        "C",
+        "JavaScript",
+        "HTML / CSS",
+        "Vue.js",
+        "Flutter / Dart",
+        "FastAPI",
+        "SQL",
+        "Docker",
+        "Git",
+        "Firebase"
+      ]
     },
     {
       "icon": "fas fa-brain",
       "name": "AI & Data",
-      "items": ["Machine Learning", "Deep Learning", "PyTorch", "Scikit-Learn", "Pandas", "NumPy", "Matplotlib", "Feature Engineering", "Random Forest", "KNN", "Data Analysis"]
+      "items": [
+        "Machine Learning",
+        "Deep Learning",
+        "PyTorch",
+        "Scikit-Learn",
+        "Pandas",
+        "NumPy",
+        "Matplotlib",
+        "Feature Engineering",
+        "Random Forest",
+        "KNN",
+        "Data Analysis"
+      ]
     }
   ],
   "experience": [
@@ -53,7 +104,14 @@
       "desc": "An AI-powered threat detection system that analyzes files and URLs using two specialized Random Forest classifiers trained on the EMBER 2018 dataset (150k+ samples). Includes a Docker-based isolation sandbox, REST API backend, and multilingual frontend with real-time PDF threat reports.",
       "accent": "~97% classification accuracy",
       "github": "",
-      "stack": ["Python", "FastAPI", "Vue.js", "Docker", "Random Forest", "Cybersecurity"],
+      "stack": [
+        "Python",
+        "FastAPI",
+        "Vue.js",
+        "Docker",
+        "Random Forest",
+        "Cybersecurity"
+      ],
       "image": ""
     },
     {
@@ -62,7 +120,13 @@
       "desc": "A machine learning pipeline that predicts cancer risk from tumor feature data. Applies systematic data preprocessing, feature engineering, and model tuning across multiple classifiers to achieve high classification confidence for clinical decision support.",
       "accent": "94% accuracy — January 2026",
       "github": "",
-      "stack": ["Python", "Scikit-Learn", "KNN", "Pandas", "Feature Engineering"],
+      "stack": [
+        "Python",
+        "Scikit-Learn",
+        "KNN",
+        "Pandas",
+        "Feature Engineering"
+      ],
       "image": ""
     },
     {
@@ -71,7 +135,13 @@
       "desc": "Conceived and leading the full-stack development of an IoT device that monitors water quality in real time using pH and contaminant sensors. The system integrates hardware circuitry, embedded firmware, and a mobile interface for live data visualization.",
       "accent": "Hardware + Firmware + App",
       "github": "",
-      "stack": ["Flutter", "ESP32", "Circuit Design", "Embedded Systems", "Firebase"],
+      "stack": [
+        "Flutter",
+        "ESP32",
+        "Circuit Design",
+        "Embedded Systems",
+        "Firebase"
+      ],
       "image": ""
     },
     {
@@ -80,7 +150,12 @@
       "desc": "A mobile application for iOS and Android providing safe, gender-matched ride-sharing for women. The platform connects female passengers with female drivers, addressing transportation safety and trust through a purpose-built mobile experience.",
       "accent": "iOS + Android, currently in dev",
       "github": "",
-      "stack": ["Flutter", "Firebase", "Dart", "Maps API"],
+      "stack": [
+        "Flutter",
+        "Firebase",
+        "Dart",
+        "Maps API"
+      ],
       "image": ""
     },
     {
@@ -89,7 +164,12 @@
       "desc": "A crop intelligence system that provides farmers with personalized recommendations on crop management, pest control, and irrigation scheduling using K-Nearest Neighbors classification over agricultural feature data.",
       "accent": "View on GitHub",
       "github": "https://github.com/cerine-guerra/knn_smart_agriculture_model",
-      "stack": ["Python", "KNN", "Pandas", "Jupyter"],
+      "stack": [
+        "Python",
+        "KNN",
+        "Pandas",
+        "Jupyter"
+      ],
       "image": ""
     },
     {
@@ -98,17 +178,46 @@
       "desc": "A classification model that determines whether a breast tumor is benign or malignant using 30 clinical features from the UCI dataset. Implements the KNN algorithm with data normalization and cross-validation for reliable clinical predictions.",
       "accent": "View on GitHub",
       "github": "https://github.com/cerine-guerra/breast-cancer-knn-classifier",
-      "stack": ["Python", "KNN", "Scikit-Learn", "UCI Dataset"],
+      "stack": [
+        "Python",
+        "KNN",
+        "Scikit-Learn",
+        "UCI Dataset"
+      ],
       "image": ""
     }
   ],
   "certifications": [
-    { "year": "2026", "name": "IoT Bootcamp", "org": "Intellect Scientific Club — IGEE, Boumerdes" },
-    { "year": "2026", "name": "2nd Place — IACE 2nd Edition", "org": "Intellect Scientific Club" },
-    { "year": "2025", "name": "Python for Artificial Intelligence", "org": "Intellect Scientific Club — IGEE, Boumerdes" },
-    { "year": "2025", "name": "First Aid Certification", "org": "Red Crescent — Boumerdes, Algeria" },
-    { "year": "2025", "name": "Ideathon Participant", "org": "Intelectronics Scientific Club" },
-    { "year": "2024", "name": "Baccalaureate — Electrical Engineering", "org": "Technical High School Raid Nahnahe, Reghaia" }
+    {
+      "year": "2026",
+      "name": "IoT Bootcamp",
+      "org": "Intellect Scientific Club — IGEE, Boumerdes"
+    },
+    {
+      "year": "2026",
+      "name": "2nd Place — IACE 2nd Edition",
+      "org": "Intellect Scientific Club"
+    },
+    {
+      "year": "2025",
+      "name": "Python for Artificial Intelligence",
+      "org": "Intellect Scientific Club — IGEE, Boumerdes"
+    },
+    {
+      "year": "2025",
+      "name": "First Aid Certification",
+      "org": "Red Crescent — Boumerdes, Algeria"
+    },
+    {
+      "year": "2025",
+      "name": "Ideathon Participant",
+      "org": "Intelectronics Scientific Club"
+    },
+    {
+      "year": "2024",
+      "name": "Baccalaureate — Electrical Engineering",
+      "org": "Technical High School Raid Nahnahe, Reghaia"
+    }
   ],
   "cvRequests": []
 }
